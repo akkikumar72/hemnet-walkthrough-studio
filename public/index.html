@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Hemnet Walkthrough Studio</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "/vendor/build/three.module.js",
+          "three/addons/": "/vendor/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="/" aria-label="Walkthrough Studio home"
+        ><svg viewBox="0 0 32 32" aria-hidden="true">
+          <path
+            d="M3 26V11L16 3l13 8v15H3Zm8 0V14l10-6m-10 6 18-3M21 8v18"
+          /></svg
+        ><span>Walkthrough<span class="brand-light">Studio</span></span></a
+      ><span class="local"><i></i> Runs on your computer</span
+      ><button id="settings-open" class="quiet">API settings</button>
+    </header>
+    <div class="shell">
+      <aside>
+        <div class="rail-heading">
+          <h2>Your projects</h2>
+          <button id="new-project" aria-label="New project">+</button>
+        </div>
+        <nav id="projects" aria-label="Saved projects"></nav>
+        <div class="rail-bottom">
+          <span class="version">Open source / v0.1</span>
+          <p>One scene.<br />Two ways to explore.</p>
+          <div class="engine-names">Three.js <span>+</span> Unreal Engine</div>
+          <a
+            href="https://github.com/akkikumar72/hemnet-walkthrough-studio"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Documentation</a
+          >
+        </div>
+      </aside>
+      <main>
+        <section id="intake">
+          <div class="intro">
+            <span class="kicker">From listing to living space</span>
+            <h1>Step inside<br />the possibilities.</h1>
+            <p>
+              Bring a Hemnet listing into an editable 3D workspace. Review the
+              evidence, build a first draft, then make it your own.
+            </p>
+          </div>
+          <form id="import-form">
+            <label for="listing-url">Hemnet listing link</label>
+            <div class="link-field">
+              <input
+                id="listing-url"
+                type="url"
+                placeholder="https://www.hemnet.se/bostad/…"
+                autocomplete="off"
+              /><button class="primary" type="submit">Import listing</button>
+            </div>
+            <label class="check"
+              ><input id="rights" type="checkbox" required /> I have permission
+              to use these listing photos.</label
+            >
+            <div class="intake-actions">
+              <button id="upload-start" type="button" class="quiet">
+                Or upload your photos</button
+              ><button id="demo" type="button" class="quiet">
+                Explore the demo
+              </button>
+            </div>
+            <small
+              >Imports stay local. AI reconstruction sends selected photos to
+              OpenAI only when you choose to generate.</small
+            >
+          </form>
+        </section>
+        <section id="project-panel" hidden>
+          <div class="project-heading">
+            <div>
+              <span class="kicker" id="project-status">References</span>
+              <h1 id="project-title"></h1>
+            </div>
+            <button id="new-from-panel" class="quiet">New project</button>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Project workspace">
+            <button role="tab" aria-selected="true" data-tab="references">
+              References</button
+            ><button role="tab" aria-selected="false" data-tab="scene">
+              Scene & review
+            </button>
+          </div>
+          <div id="references-panel">
+            <div class="panel-heading">
+              <div>
+                <h2>Start with the evidence</h2>
+                <p id="photo-count">Add interior photos and floor plans.</p>
+              </div>
+              <button id="add-photos">Add photos</button>
+            </div>
+            <div id="photos" class="photo-grid"></div>
+            <div class="generate-panel">
+              <label for="notes">Measurements or reconstruction notes</label
+              ><textarea
+                id="notes"
+                rows="2"
+                placeholder="For example: ceiling height is 2.5 m; the door beside the kitchen leads to the hall."
+              ></textarea>
+              <div class="generation-options">
+                <label
+                  >Preferred renderer<select id="engine">
+                    <option value="three">Three.js browser tour</option>
+                    <option value="unreal">Unreal Editor project</option>
+                  </select></label
+                ><label class="check"
+                  ><input type="checkbox" id="ai-consent" /> Send selected
+                  photos and notes to OpenAI. API charges apply.</label
+                ><button id="generate" class="primary">
+                  Generate 3D draft
+                </button>
+              </div>
+              <p class="fine">
+                A first draft needs review. Photos alone do not establish exact
+                dimensions or hidden room connections.
+              </p>
+            </div>
+          </div>
+          <div id="scene-panel" hidden>
+            <div class="panel-heading">
+              <div>
+                <h2>Review before you refine</h2>
+                <p id="scene-summary"></p>
+              </div>
+              <div class="button-row">
+                <button id="download-json">Scene JSON</button
+                ><button id="download-glb">3D model (.glb)</button
+                ><button id="download-unreal" class="primary">
+                  Unreal project
+                </button>
+              </div>
+            </div>
+            <ul id="warnings" class="review-notes"></ul>
+            <details id="editor-details">
+              <summary>Edit or import scene data</summary>
+              <p>
+                Use the included Codex skill to refine this scene against your
+                photos. Saving validates geometry and retains the previous
+                version locally.
+              </p>
+              <input
+                id="scene-file"
+                type="file"
+                accept=".json,application/json"
+                aria-label="Import scene JSON"
+              /><textarea
+                id="scene-json"
+                spellcheck="false"
+                aria-label="Scene JSON editor"
+              ></textarea
+              ><button id="save-scene">Validate & save scene</button>
+            </details>
+          </div>
+        </section>
+        <div id="status" role="status" aria-live="polite"></div>
+        <section class="viewer-panel">
+          <div class="viewer-heading">
+            <div>
+              <span id="view-label">Fictional demonstration</span>
+              <h2 id="view-title">Courtyard House</h2>
+            </div>
+            <div class="viewer-modes">
+              <button id="orbit" aria-pressed="true">Overview</button
+              ><button id="walk" aria-pressed="false">Walk</button>
+            </div>
+          </div>
+          <div id="viewport" tabindex="0" aria-label="Interactive 3D scene">
+            <div id="view-badge">Editable draft</div>
+            <div id="empty-scene" hidden>Add references to begin</div>
+            <figure id="source" hidden>
+              <figcaption>Source photo</figcaption>
+              <img
+                id="source-image"
+                alt="Reference photo for the current room"
+              />
+            </figure>
+            <div id="view-hint">Drag to orbit · Scroll to zoom</div>
+          </div>
+          <div class="viewer-toolbar">
+            <button id="play" class="primary">Play tour</button
+            ><input
+              id="timeline"
+              type="range"
+              min="0"
+              max="1"
+              step="0.05"
+              value="0"
+              aria-label="Tour timeline"
+            /><span id="time">00:00</span
+            ><select id="room-jump" aria-label="Go to room"></select
+            ><button id="record">Record video</button>
+          </div>
+          <div class="viewer-footer">
+            <span id="scene-stat"
+              >Original demo geometry. No listing photos.</span
+            ><span id="record-status"></span
+            ><a id="export-link" hidden download>Download export</a>
+          </div>
+        </section>
+        <footer>
+          Built for evidence-led reconstruction. Geometry, materials and camera
+          paths stay editable.
+        </footer>
+      </main>
+    </div>
+    <input
+      id="photo-files"
+      type="file"
+      accept="image/jpeg,image/png,image/webp"
+      multiple
+      hidden
+    />
+    <dialog id="settings">
+      <form id="settings-form">
+        <div class="dialog-heading">
+          <h2>Connect your OpenAI account</h2>
+          <button type="button" id="settings-close" aria-label="Close settings">
+            ×
+          </button>
+        </div>
+        <p>
+          Use an OpenAI API key. Codex API-key authentication uses the same
+          platform keys. A ChatGPT subscription is not an API key.
+        </p>
+        <label for="api-key">API key for this browser session</label
+        ><input
+          type="password"
+          id="api-key"
+          autocomplete="off"
+          placeholder="Stored only in memory"
+        /><small id="key-status"></small
+        ><label for="model">Vision-capable model</label
+        ><input id="model" value="gpt-6-astra" />
+        <p class="fine">
+          You can also set OPENAI_API_KEY and OPENAI_MODEL in your local .env
+          file. Keys are never written to projects, browser storage or exports.
+        </p>
+        <button class="primary" type="submit">Use these settings</button>
+      </form>
+    </dialog>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

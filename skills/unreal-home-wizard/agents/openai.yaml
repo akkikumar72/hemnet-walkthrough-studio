@@ -1,0 +1,6 @@
+interface:
+  display_name: "Home Walkthrough Wizard"
+  short_description: "Hemnet photos to Three.js or Unreal home tours"
+  default_prompt: "$unreal-home-wizard - build a local home walkthrough from my Hemnet listing or photos, using Three.js or Unreal Engine."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.*
+!.env.example
+workspace/
+.local/
+coverage/
+.DS_Store
+__pycache__/
+*.pyc
+*.uproject
+Saved/
+Intermediate/
+DerivedDataCache/

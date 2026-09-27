@@ -1,0 +1,22 @@
+Hemnet Walkthrough Studio
+Copyright 2026 Akash Pathak
+
+This project includes Unreal Home Wizard v0.2.0 by Amir Mushich,
+https://github.com/amirmushichge/unreal-home-wizard,
+licensed under the Apache License, Version 2.0.
+
+The bundled skill retains upstream platform scripts and review references.
+Modifications: revised SKILL.md and agents/openai.yaml; added
+references/studio-workflow.md; integrated local Three.js and Unreal export
+workflows, API-key handling guidance, privacy and delivery boundaries.
+Modifications dated 2026-09-27.
+
+Runtime dependencies are obtained separately through npm:
+Three.js (MIT), fflate (MIT), Ajv (MIT), with their transitive dependencies.
+Their respective licenses remain applicable. Unreal Engine is installed
+separately and is governed by Epic's license. It is not redistributed here.
+
+Original fictional demo geometry and the application screenshot are provided
+under this repository's Apache-2.0 license. Third-party listing photos,
+map data, furniture assets and other client inputs are not included and
+are not licensed by this repository.

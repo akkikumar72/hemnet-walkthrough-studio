@@ -1,0 +1,823 @@
+{
+  "version": 1,
+  "title": "Courtyard House",
+  "summary": "An original fictional two-room apartment for exploring the workflow. It is not a Hemnet reconstruction.",
+  "assumptions": [
+    "All dimensions and furnishing choices are fictional.",
+    "This roofless demonstration scene is not a measured property."
+  ],
+  "rooms": [
+    {
+      "id": "living",
+      "name": "Living and dining",
+      "floor": 0,
+      "elevation": 0,
+      "bounds": [
+        0,
+        0,
+        7,
+        6
+      ],
+      "photoIds": []
+    },
+    {
+      "id": "bedroom",
+      "name": "Bedroom",
+      "floor": 0,
+      "elevation": 0,
+      "bounds": [
+        7,
+        0,
+        4.5,
+        6
+      ],
+      "photoIds": []
+    }
+  ],
+  "elements": [
+    {
+      "id": "living-floor",
+      "room": "living",
+      "kind": "floor",
+      "position": [
+        3.5,
+        -0.08,
+        3.0
+      ],
+      "size": [
+        7,
+        0.16,
+        6
+      ],
+      "rotation": 0,
+      "color": "#b19a7c",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "bedroom-floor",
+      "room": "bedroom",
+      "kind": "floor",
+      "position": [
+        9.25,
+        -0.08,
+        3.0
+      ],
+      "size": [
+        4.5,
+        0.16,
+        6
+      ],
+      "rotation": 0,
+      "color": "#b19a7c",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "back",
+      "room": "living",
+      "kind": "wall",
+      "position": [
+        5.75,
+        1.4,
+        0
+      ],
+      "size": [
+        11.5,
+        2.8,
+        0.16
+      ],
+      "rotation": 0,
+      "color": "#ece9e2",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "front-low",
+      "room": "living",
+      "kind": "wall",
+      "position": [
+        5.75,
+        0.4,
+        6
+      ],
+      "size": [
+        11.5,
+        0.8,
+        0.16
+      ],
+      "rotation": 0,
+      "color": "#ece9e2",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "front-top",
+      "room": "living",
+      "kind": "wall",
+      "position": [
+        5.75,
+        2.65,
+        6
+      ],
+      "size": [
+        11.5,
+        0.3,
+        0.16
+      ],
+      "rotation": 0,
+      "color": "#ece9e2",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "window-post-0",
+      "room": "living",
+      "kind": "wall",
+      "position": [
+        0,
+        1.7,
+        6
+      ],
+      "size": [
+        0.18,
+        1.8,
+        0.16
+      ],
+      "rotation": 0,
+      "color": "#ece9e2",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "window-post-3.5",
+      "room": "living",
+      "kind": "wall",
+      "position": [
+        3.5,
+        1.7,
+        6
+      ],
+      "size": [
+        0.18,
+        1.8,
+        0.16
+      ],
+      "rotation": 0,
+      "color": "#ece9e2",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "window-post-7",
+      "room": "bedroom",
+      "kind": "wall",
+      "position": [
+        7,
+        1.7,
+        6
+      ],
+      "size": [
+        0.18,
+        1.8,
+        0.16
+      ],
+      "rotation": 0,
+      "color": "#ece9e2",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "window-post-11.5",
+      "room": "bedroom",
+      "kind": "wall",
+      "position": [
+        11.5,
+        1.7,
+        6
+      ],
+      "size": [
+        0.18,
+        1.8,
+        0.16
+      ],
+      "rotation": 0,
+      "color": "#ece9e2",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "window-1.75",
+      "room": "living",
+      "kind": "window",
+      "position": [
+        1.75,
+        1.7,
+        6
+      ],
+      "size": [
+        3.3,
+        1.8,
+        0.05
+      ],
+      "rotation": 0,
+      "color": "#b3cfdb",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "window-5.25",
+      "room": "living",
+      "kind": "window",
+      "position": [
+        5.25,
+        1.7,
+        6
+      ],
+      "size": [
+        3.3,
+        1.8,
+        0.05
+      ],
+      "rotation": 0,
+      "color": "#b3cfdb",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "window-9.25",
+      "room": "bedroom",
+      "kind": "window",
+      "position": [
+        9.25,
+        1.7,
+        6
+      ],
+      "size": [
+        4.3,
+        1.8,
+        0.05
+      ],
+      "rotation": 0,
+      "color": "#b3cfdb",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "left",
+      "room": "living",
+      "kind": "wall",
+      "position": [
+        0,
+        1.4,
+        3
+      ],
+      "size": [
+        0.16,
+        2.8,
+        6
+      ],
+      "rotation": 0,
+      "color": "#ece9e2",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "right",
+      "room": "bedroom",
+      "kind": "wall",
+      "position": [
+        11.5,
+        1.4,
+        3
+      ],
+      "size": [
+        0.16,
+        2.8,
+        6
+      ],
+      "rotation": 0,
+      "color": "#d4dcda",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "divider-a",
+      "room": "bedroom",
+      "kind": "wall",
+      "position": [
+        7,
+        1.4,
+        1.1
+      ],
+      "size": [
+        0.14,
+        2.8,
+        2.2
+      ],
+      "rotation": 0,
+      "color": "#ece9e2",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "divider-b",
+      "room": "bedroom",
+      "kind": "wall",
+      "position": [
+        7,
+        1.4,
+        4.6
+      ],
+      "size": [
+        0.14,
+        2.8,
+        2.8
+      ],
+      "rotation": 0,
+      "color": "#ece9e2",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "door-header",
+      "room": "bedroom",
+      "kind": "wall",
+      "position": [
+        7,
+        2.5,
+        2.7
+      ],
+      "size": [
+        0.14,
+        0.6,
+        1
+      ],
+      "rotation": 0,
+      "color": "#ece9e2",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "rug",
+      "room": "living",
+      "kind": "rug",
+      "position": [
+        2.25,
+        0.025,
+        3.2
+      ],
+      "size": [
+        3.65,
+        0.035,
+        3.2
+      ],
+      "rotation": 0,
+      "color": "#d4d0c6",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "sofa",
+      "room": "living",
+      "kind": "sofa",
+      "position": [
+        2.15,
+        0.49,
+        1.7
+      ],
+      "size": [
+        3,
+        0.98,
+        0.96
+      ],
+      "rotation": 0,
+      "color": "#5a7378",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "coffee",
+      "room": "living",
+      "kind": "table",
+      "position": [
+        2.3,
+        0.24,
+        3.12
+      ],
+      "size": [
+        1.45,
+        0.48,
+        0.76
+      ],
+      "rotation": 0,
+      "color": "#a3835f",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "armchair",
+      "room": "living",
+      "kind": "chair",
+      "position": [
+        0.94,
+        0.48,
+        4.22
+      ],
+      "size": [
+        0.8,
+        0.96,
+        0.78
+      ],
+      "rotation": 155,
+      "color": "#c9bca5",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "plant",
+      "room": "living",
+      "kind": "plant",
+      "position": [
+        0.55,
+        0.93,
+        5.4
+      ],
+      "size": [
+        0.85,
+        1.86,
+        0.85
+      ],
+      "rotation": 0,
+      "color": "#547666",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "lamp",
+      "room": "living",
+      "kind": "lamp",
+      "position": [
+        3.94,
+        0.86,
+        1.28
+      ],
+      "size": [
+        0.46,
+        1.72,
+        0.46
+      ],
+      "rotation": 0,
+      "color": "#e5dfcc",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "dining",
+      "room": "living",
+      "kind": "table",
+      "position": [
+        5.3,
+        0.39,
+        4.53
+      ],
+      "size": [
+        1.9,
+        0.78,
+        1.02
+      ],
+      "rotation": 0,
+      "color": "#b79c74",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "chair0",
+      "room": "living",
+      "kind": "chair",
+      "position": [
+        4.72,
+        0.46,
+        3.67
+      ],
+      "size": [
+        0.53,
+        0.92,
+        0.52
+      ],
+      "rotation": 180,
+      "color": "#d9d6cc",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "chair1",
+      "room": "living",
+      "kind": "chair",
+      "position": [
+        5.8,
+        0.46,
+        3.67
+      ],
+      "size": [
+        0.53,
+        0.92,
+        0.52
+      ],
+      "rotation": 180,
+      "color": "#d9d6cc",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "chair2",
+      "room": "living",
+      "kind": "chair",
+      "position": [
+        4.72,
+        0.46,
+        5.39
+      ],
+      "size": [
+        0.53,
+        0.92,
+        0.52
+      ],
+      "rotation": 0,
+      "color": "#d9d6cc",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "chair3",
+      "room": "living",
+      "kind": "chair",
+      "position": [
+        5.8,
+        0.46,
+        5.39
+      ],
+      "size": [
+        0.53,
+        0.92,
+        0.52
+      ],
+      "rotation": 0,
+      "color": "#d9d6cc",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "kitchen0",
+      "room": "living",
+      "kind": "cabinet",
+      "position": [
+        4.1,
+        0.46,
+        0.52
+      ],
+      "size": [
+        0.84,
+        0.92,
+        0.72
+      ],
+      "rotation": 0,
+      "color": "#d6dbd5",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "kitchen1",
+      "room": "living",
+      "kind": "cabinet",
+      "position": [
+        4.96,
+        0.46,
+        0.52
+      ],
+      "size": [
+        0.84,
+        0.92,
+        0.72
+      ],
+      "rotation": 0,
+      "color": "#d6dbd5",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "kitchen2",
+      "room": "living",
+      "kind": "cabinet",
+      "position": [
+        5.819999999999999,
+        0.46,
+        0.52
+      ],
+      "size": [
+        0.84,
+        0.92,
+        0.72
+      ],
+      "rotation": 0,
+      "color": "#d6dbd5",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "bed",
+      "room": "bedroom",
+      "kind": "bed",
+      "position": [
+        9.4,
+        0.62,
+        2.4
+      ],
+      "size": [
+        1.9,
+        1.24,
+        2.2
+      ],
+      "rotation": 0,
+      "color": "#e3ddd1",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "bed-rug",
+      "room": "bedroom",
+      "kind": "rug",
+      "position": [
+        9.4,
+        0.027,
+        3
+      ],
+      "size": [
+        2.9,
+        0.035,
+        3.5
+      ],
+      "rotation": 0,
+      "color": "#c9c3b7",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "nightstand7.95",
+      "room": "bedroom",
+      "kind": "cabinet",
+      "position": [
+        7.95,
+        0.3,
+        1.66
+      ],
+      "size": [
+        0.6,
+        0.6,
+        0.55
+      ],
+      "rotation": 0,
+      "color": "#b8966b",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "nightstand10.85",
+      "room": "bedroom",
+      "kind": "cabinet",
+      "position": [
+        10.85,
+        0.3,
+        1.66
+      ],
+      "size": [
+        0.6,
+        0.6,
+        0.55
+      ],
+      "rotation": 0,
+      "color": "#b8966b",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    },
+    {
+      "id": "bed-plant",
+      "room": "bedroom",
+      "kind": "plant",
+      "position": [
+        10.9,
+        0.7,
+        5.3
+      ],
+      "size": [
+        0.6,
+        1.4,
+        0.6
+      ],
+      "rotation": 0,
+      "color": "#60795d",
+      "sourcePhoto": "",
+      "confidence": "estimated"
+    }
+  ],
+  "route": [
+    {
+      "room": "living",
+      "position": [
+        1.2,
+        1.6,
+        4.9
+      ],
+      "target": [
+        2.3,
+        1,
+        2
+      ],
+      "seconds": 3
+    },
+    {
+      "room": "living",
+      "position": [
+        3.2,
+        1.6,
+        4.3
+      ],
+      "target": [
+        2.2,
+        1,
+        1.6
+      ],
+      "seconds": 5
+    },
+    {
+      "room": "living",
+      "position": [
+        4.1,
+        1.6,
+        2.8
+      ],
+      "target": [
+        5.3,
+        1,
+        4.5
+      ],
+      "seconds": 4
+    },
+    {
+      "room": "living",
+      "position": [
+        6,
+        1.6,
+        2.7
+      ],
+      "target": [
+        8.5,
+        1.2,
+        3
+      ],
+      "seconds": 4
+    },
+    {
+      "room": "bedroom",
+      "position": [
+        7.6,
+        1.6,
+        2.7
+      ],
+      "target": [
+        9.4,
+        0.8,
+        2.5
+      ],
+      "seconds": 3
+    },
+    {
+      "room": "bedroom",
+      "position": [
+        8,
+        1.6,
+        4.3
+      ],
+      "target": [
+        9.6,
+        1,
+        2.5
+      ],
+      "seconds": 4
+    },
+    {
+      "room": "bedroom",
+      "position": [
+        9.8,
+        1.6,
+        4.5
+      ],
+      "target": [
+        8.2,
+        1.1,
+        2.2
+      ],
+      "seconds": 4
+    }
+  ]
+}
