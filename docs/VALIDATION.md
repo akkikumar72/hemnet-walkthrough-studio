@@ -6,6 +6,7 @@ Checked on 2026-09-27. This separates implementation checks from reconstruction 
 |---|---|
 | JavaScript syntax and DOM bindings | Passed across 12 modules |
 | Source formatting | Passed |
+| Runtime dependency audit | Zero reported vulnerabilities after updating Ajv and fflate |
 | Node integration suite | 7 tests passed; no paid calls |
 | Browser demo | Created and reopened a saved project; room navigation and tour controls worked |
 | Scene editor | Rejected invalid JSON structure; accepted valid scene; retained prior version |
