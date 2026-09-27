@@ -130,8 +130,4 @@ Checks cover syntax, UI element bindings, URL restrictions, photo workflows, mod
 
 Read [validation evidence](docs/VALIDATION.md) for the distinction between automated tests, real browser checks, and an actual Unreal build. Contributions should include evidence for changed user flows and keep private listing data out of fixtures.
 
-## Credits and license
-
-Apache-2.0. The included skill is adapted from [Amir Mushich's Unreal Home Wizard v0.2.0](https://github.com/amirmushichge/unreal-home-wizard/tree/v0.2.0), retaining its platform scripts and review references. See [NOTICE](NOTICE) for modifications and dependency attribution.
-
-This is an independent project, unaffiliated with Hemnet, Epic Games or OpenAI. Listing photographs and third-party assets are not covered by this repository's code license. The public demo and README image use original fictional geometry.
+photographs and third-party assets are not covered by this repository's code license. The public demo and README image use original fictional geometry.
