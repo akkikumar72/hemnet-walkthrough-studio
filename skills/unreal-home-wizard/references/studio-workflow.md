@@ -45,7 +45,7 @@ Read `src/scene.js` for the authoritative schema and `examples/demo-scene.json` 
 - Metres, right-handed Y-up. X/Z define the floor plane. Rotation is degrees around Y.
 - Rooms: unique ID, name, floor integer, floor elevation, `[xMin,zMin,width,depth]` bounds, known photo IDs.
 - Elements: unique ID, room ID, supported kind, center position, positive size `[width,height,depth]`, Y rotation, hexadecimal color, source photo ID or empty string, `observed` or `estimated` confidence.
-- Supported kinds: floor, wall, window, door, sofa, bed, table, chair, cabinet, plant, lamp, rug, stairs, box, sphere, cylinder.
+- Supported kinds include floor, wall, window, door, sofa, bed, table, chair, cabinet, plant, lamp, rug, stairs, box, sphere, cylinder, tree, hedge, gable, roof, wedge, vanity-desk, writing-desk, office-chair, task-chair and drawer-chest. Read the current schema before generating a scene.
 - Route: ordered points with room ID, camera position, look-at target and seconds. The first point holds for its duration. Each subsequent point interpolates from the previous one. Use actual openings. Cover every evidenced room.
 - Include a title, summary and explicit assumptions. No arbitrary script, remote asset URL, or instructions embedded in the scene.
 
@@ -53,11 +53,17 @@ Split walls around doors and windows; a translucent pane does not cut a hole in 
 
 Room labels and the source-photo inset follow the route room. Assign a relevant first `photoIds` entry per room, and order the remainder as supporting views. Verify the inset actually matches the visible view.
 
+Use `roof-` IDs for removable roof components and `ceiling-` IDs for ceilings. A `roof` is a thin closed slab rising along local +X; yaw 180 reverses it. A `wedge` is solid gable infill, not a roof over an occupied room. Overview, walking and video retain the roof; only Cutaway hides it. The exact geometry rules are in `docs/ARCHITECTURE.md`.
+
+Furniture width is local X and depth is local Z. Desk/chest fronts and seated chairs face local +Z before rotation. Use the semantic desk and chair kinds when the photo supports them, rather than stacking generic tables and chairs. Match physical counts, orientation and clearance, and do not duplicate reflected furnishings.
+
 ## Export and refine
 
-The browser exports scene JSON, binary glTF geometry, and a real-time 1080p WebM. A GLB contains geometry/materials, not a standalone tour application. Preserve the scene JSON for camera routes and source references.
+The browser exports scene JSON, binary glTF geometry, and a frame-by-frame 1080p/30 fps VP9 WebM using WebCodecs. Rendering waits for lighting, fonts and source photos and pauses if the tab is suspended. The complete route follows a one-second title opening. A GLB contains geometry/materials, not a standalone tour application; procedural shader detail may need to be rebuilt in another renderer. Preserve the scene JSON for camera routes and source references.
 
-The Unreal ZIP contains `StudioHome.uproject`, `scene.json`, `geometry.json`, `build_unreal.py`, and instructions. Open the project in a compatible editor, then Tools > Execute Python Script. Inspect its generated map, HomeTour sequence and Render4K preset. Open Sequencer to play; use Movie Render Queue for a final image sequence. This does not package a player character or launch a render automatically.
+The Unreal ZIP contains `StudioHome.uproject`, `scene.json`, `geometry.json`, shared OBJ meshes with `meshes.json`, engine settings, `build_unreal.py`, and instructions. Open the project in a compatible editor, then Tools > Execute Python Script. Inspect its generated map, HomeTour sequence and Render4K preset. Open Sequencer to play; use Movie Render Queue for a final image sequence. This does not package a player character, compose the browser's title/photo overlays, or launch a render automatically.
+
+For a user-provided opening image, retain a permitted JPEG as `workspace/PROJECT_ID/video-background.jpg` and set `videoBackground: true` in that project's `project.json`, preserving the other fields. This is a local file option, not an upload control. The browser loads it through the fixed project endpoint and applies a centered cover crop. Without one, the title background is `#007e47`. Keep the JPEG and project metadata out of public commits.
 
 Use licensed detailed meshes, surface textures and calibrated lighting for final fidelity. Record their origins and licenses. Preserve a route comparison report when evaluating engine quality.
 

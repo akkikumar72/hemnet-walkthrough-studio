@@ -1,0 +1,22 @@
+{
+  "date": "2026-09-27",
+  "scope": "Single-page app with intake, references, scene review and API settings",
+  "framework": "Vanilla HTML, CSS and JavaScript; Three.js renderer",
+  "fontStackBefore": "Georgia display and system sans",
+  "paletteBefore": "Cool white and blue slate",
+  "motion": "No motion library; press feedback only",
+  "preserve": [
+    "project data",
+    "photos",
+    "Three.js scene",
+    "Unreal export",
+    "API consent workflow"
+  ],
+  "override": "User approved the previously studied Lumen direction",
+  "sources": [
+    "package.json",
+    "public/style.css",
+    "public/index.html",
+    "docs/DESIGN.md"
+  ]
+}

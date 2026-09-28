@@ -209,6 +209,18 @@ export async function createStudio({
           }
           return send(res, 200, publicProject(p));
         }
+        if (req.method === "GET" && action === "video-background") {
+          if (!p.videoBackground)
+            return send(res, 404, {
+              error: "Video background not configured.",
+            });
+          return send(
+            res,
+            200,
+            await readFile(path.join(dir, "video-background.jpg")),
+            "image/jpeg",
+          );
+        }
         if (req.method === "GET" && action === "photos" && parts[4]) {
           const photo = p.photos.find((x) => x.id === parts[4]);
           if (!photo) return send(res, 404, { error: "Photo not found." });

@@ -1,25 +1,35 @@
 # Validation record
 
+## Repository release check, 2026-09-28
+
+The current reusable app passed all 14 automated tests, syntax checks across 21 JavaScript modules, DOM binding checks, Prettier, whitespace checks and Python compilation of the Unreal builder. The HTTP integration tests ran with loopback access and used mocked model responses; no paid generation request was made.
+
+A fresh isolated demo workspace verified project creation, visible tour playback, room selection, return to Overview and completed browser export. The exported VP9 WebM fully decoded as 1920 × 1080, 30 fps, 840 frames and exactly 28 seconds: the demo's 27-second route plus its one-second title opening. A representative decoded frame was inspected. The README screenshot comes from this running fictional demo, without private property data. The browser automation's download notification timed out, so verification used the generated blob link; ordinary downloads should still be checked in the intended browser.
+
+The updated bundled skill passed the macOS system-Ruby safe validator. Its installer was exercised in an ignored temporary workspace, and a fresh Codex app-server process discovered that copy as an enabled repository skill. No new model-driven reconstruction or Unreal render was run for this publication check; the dated comparison evidence below records earlier work and its limits.
+
+## Initial release check, 2026-09-27
+
 Checked on 2026-09-27. This separates implementation checks from reconstruction quality claims.
 
-| Check | Result |
-|---|---|
-| JavaScript syntax and DOM bindings | Passed across 12 modules |
-| Source formatting | Passed |
-| Runtime dependency audit | Zero reported vulnerabilities after updating Ajv and fflate |
-| Node integration suite | 7 tests passed; no paid calls |
-| Browser demo | Created and reopened a saved project; room navigation and tour controls worked |
-| Scene editor | Rejected invalid JSON structure; accepted valid scene; retained prior version |
-| Local upload fallback | Uploaded a fictional demo screenshot after a blocked Hemnet import; category persisted |
-| Generation consent | Generate required consent, then opened Settings because no API key was configured |
-| Live Hemnet import | HTTP 403; UI explained the restriction and offered local upload |
-| Browser GLB export | Valid glTF 2 binary, 116 meshes, 117 nodes, 2,939,888 bytes |
-| Browser video | VP9, 1920×1080, 810 decoded frames, final timestamp about 26.96 seconds; full decode passed |
-| Responsive layout | Desktop and narrow mobile layout inspected; no horizontal document overflow |
-| Unreal Engine 5.8.3 on macOS | Actual Python build succeeded in an isolated project; 116 primitives, saved map, 810-frame HomeTour, Render4K preset |
-| CLI | Imported the fictional scene and exported a readable Unreal ZIP through the running local API |
-| Skill syntax | System Ruby safe validator passed, with no dependency download |
-| Fresh Codex discovery | Fresh local app-server `skills/list` discovered the updated user skill and description |
+| Check                              | Result                                                                                                               |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| JavaScript syntax and DOM bindings | Passed across 12 modules                                                                                             |
+| Source formatting                  | Passed                                                                                                               |
+| Runtime dependency audit           | Zero reported vulnerabilities after updating Ajv and fflate                                                          |
+| Node integration suite             | 7 tests passed; no paid calls                                                                                        |
+| Browser demo                       | Created and reopened a saved project; room navigation and tour controls worked                                       |
+| Scene editor                       | Rejected invalid JSON structure; accepted valid scene; retained prior version                                        |
+| Local upload fallback              | Uploaded a fictional demo screenshot after a blocked Hemnet import; category persisted                               |
+| Generation consent                 | Generate required consent, then opened Settings because no API key was configured                                    |
+| Live Hemnet import                 | HTTP 403; UI explained the restriction and offered local upload                                                      |
+| Browser GLB export                 | Valid glTF 2 binary, 116 meshes, 117 nodes, 2,939,888 bytes                                                          |
+| Browser video                      | VP9, 1920×1080, 810 decoded frames, final timestamp about 26.96 seconds; full decode passed                          |
+| Responsive layout                  | Desktop and narrow mobile layout inspected; no horizontal document overflow                                          |
+| Unreal Engine 5.8.3 on macOS       | Actual Python build succeeded in an isolated project; 116 primitives, saved map, 810-frame HomeTour, Render4K preset |
+| CLI                                | Imported the fictional scene and exported a readable Unreal ZIP through the running local API                        |
+| Skill syntax                       | System Ruby safe validator passed, with no dependency download                                                       |
+| Fresh Codex discovery              | Fresh local app-server `skills/list` discovered the updated user skill and description                               |
 
 Browser downloads exposed persistent blob links. The in-app browser's automation download notification timed out; generated bytes were read from those links for binary and decode validation. Test download behavior in your preferred browser before customer delivery.
 
@@ -33,3 +43,63 @@ Unreal's build report confirmed creation of the map, sequence and preset. A fina
 - Windows, Linux, other browser engines, automatic neighborhood reconstruction, packaged Unreal walking, stair physics and premium photo realism were not verified.
 
 GitHub Actions runs the portable code checks and mocked tests. It does not run a GPU browser, Unreal Engine, or paid AI reconstruction.
+
+## Shared geometry and window-view comparison, 2026-09-27
+
+A private property fixture was built and actually rendered in Unreal Engine 5.8.3 on macOS. Four paired 1920 × 1080 views used a 68-degree vertical FOV. The 16-space, 163-second sequence was saved; a 21-second, 30 fps movie comparison was rendered separately. Property images and scene data remain outside Git.
+
+The comparison caught an exporter rotation defect. Named pitch/yaw/roll arguments replaced positional arguments, and actual imported box bounds then matched the shared shape dimensions within 0.1 cm. The transfer audit covered 1,407 original primitives. The later hedge density pass adds 48 interior primitives. Rounded furniture and foliage now use the shared OBJ geometry instead of basic engine replacements. Materials and light implementations remain renderer-specific.
+
+Ten automated tests pass, including landscape bounds, shared OBJ dimensions and local API/export checks. This fixture verifies a renderer comparison; it does not establish photorealism, measured property accuracy, commercial map-data integration or a universal engine-performance ranking.
+
+## Browser lighting and complete export, 2026-09-27
+
+The same private fixture was compared by object ID with the saved Unreal input. All 1,455 primitives, 16 rooms, 61 route points and source-photo references match; the shared route is 163 seconds. Browser lighting now includes matched sun direction, area lights at window panes, room-specific environment captures, SSAO and a four-sample multisampled render target. This is an approximation, not Lumen global illumination.
+
+The browser exported all 4,890 frames through WebCodecs at exact 30 fps timestamps. A complete local H.264 transcode was decoded and independently verified as 1920 × 1080, 30/1 fps, 4,890 frames and exactly 163 seconds. Contact sheets sampled all 16 rooms plus the opening and closing frames; room-specific source images and floor-plan labels were present. No tone grading or generated imagery was applied to this browser film. The corresponding full Unreal film was also previously rendered and verified at the same dimensions, duration and frame count.
+
+The private comparison player supports both complete films, retains time when switching engines, seeks by room and offers previous/current browser stills. Actual browser playback and switching were verified. Eleven automated tests pass, along with module syntax, DOM bindings, formatting and whitespace checks. The local HTTP tests require loopback permissions. Private media and test inputs remain ignored.
+
+## Roof envelope and explicit cutaway, 2026-09-27
+
+Closed inclined roof slabs and triangular wall infill now use shared Three.js/OBJ geometry. The roof unit test checks triangle-edge closure and the clear space below the sloping underside. The private property fixture passes 1,694 upward coverage rays across 14 indoor spaces, including points 1 cm from every room boundary, and has no overlapping main roof panels.
+
+Actual browser views verify the complete exterior roof, the explicit Cutaway control, and restoration of the closed shell on room navigation. A separate Unreal process reloaded the final saved map and confirmed all 1,640 expected static-mesh IDs; imported roof bounds also matched the shared geometry. Both engines produced actual exterior and interior review stills. Roof dimensions remain photo-based estimates.
+
+The final browser film was decoded as 1920 × 1080, 30/1 fps, 4,890 frames and 163 seconds, with all 16 spaces. Static browser previews now stop redrawing when idle; interaction, resize, lighting completion and frame export invalidate them. The complete updated Unreal film also finished and passed a full decode: 1920 × 1080, 30/1 fps, 4,890 frames and exactly 163 seconds. All 16 spaces and source references are retained. The local Unreal project opens the independently verified final roof map by default. Twelve automated tests, syntax, DOM bindings, formatting and whitespace checks passed for this revision.
+
+## Bedroom furnishing correction, 2026-09-28
+
+Thirteen tests pass. The added geometry check raycasts through actual office-chair back holes, confirms solid material between them, verifies all five casters touch the floor and checks exported mesh references. Syntax checks cover 21 JavaScript modules, DOM bindings pass, and changed files pass formatting and whitespace checks. No paid provider request was made.
+
+A private fixture was corrected against its original bedroom photographs: one vanity desk, two perforated swivel chairs, one five-drawer chest and one bed assembly. The live browser input and Unreal scene input are identical: 1,307 editable elements, 1,722 compiled primitives, 63 route points, 16 spaces and 163 seconds. The existing roof is preserved. A fresh Unreal process reloaded the saved map and verified the exact mesh-ID set, including all 183 roof parts. The revised route has no sampled body-clearance collisions.
+
+The complete new browser film and updated Unreal film were independently decoded: each is 1920 × 1080, 30 fps, 4,890 frames and exactly 163 seconds. Unreal freshly rendered 480 affected frames, including the bedroom approach and exit, and reused the 4,410 unchanged frames from the verified roof revision. Source references remain unchanged. Both movies and their verification JSON are private local artifacts.
+
+This fixes furniture identity, orientation and arrangement in the reviewed room. Dimensions, small object shapes, upholstery patterns and reflection quality remain approximations. It does not establish automatic photo fidelity for unseen listings.
+
+## Second bedroom workstation, 2026-09-28
+
+Fourteen tests pass after adding a solid upholstered task chair and an open frame writing desk. The new test checks that the chair back is solid, its casters touch the floor, the back stays behind the seat after rotation and the rotated desktop preserves its shallow depth. Both new shapes export through the shared Unreal mesh path.
+
+The private second-bedroom correction uses original photographs 025 and 026 to distinguish the desk, landscape monitor, keyboard, closed laptop, one task chair and timber chest. The reflected desk in the wardrobe photograph is not a second workstation. The revised shared scene has 1,369 elements and 1,796 primitives. All other room elements, the 183 roof parts, 16 spaces and 163-second duration are preserved. The modified camera route passes sampled body-clearance checks. A separate Unreal process reloads the saved map and confirms the exact primitive-ID set. Furniture dimensions, upholstery and simplified artwork remain estimates.
+
+Both final workstation-revision movies passed a complete decode at 1920 × 1080, 30 fps, 4,890 frames and 163 seconds. The browser rendered all frames; Unreal rerendered the 720 affected frames and retained 4,170 unchanged frames from the preceding verified revision. Actual frame comparisons and original photographs remain in the ignored private review folder.
+
+## Minimal video presentation, 2026-09-28
+
+Both private full films were recomposed with locally hosted Roboto, an upper-left address and changing room label, and an unlabelled source-photo inset. The full-width header, engine name, tour title and technical labels are absent from the video picture. The live browser photo caption is removed as well. The font is bundled with its SIL Open Font License.
+
+The browser rendered all 4,890 frames again. Unreal reused the latest verified raw render sequence and replaced its composition, preserving the corrected bedrooms and roof. Both H.264 outputs passed a complete decode: 1920 × 1080, 30 fps, 4,890 frames, exactly 163 seconds. Contact sheets cover all 16 spaces plus the opening and closing frames. All 14 existing tests, 21-module syntax checks and DOM binding checks pass. The underlying reconstruction and previously documented lighting limitations are unchanged.
+
+## Title card and thumbnail, 2026-09-28
+
+The current private films add a one-second opening: centered white Roboto title and address on `#007e47`, held for 0.5 seconds and faded for 0.5 seconds into a stationary first view. The original 163-second route remains complete. Both H.264 files decode to 4,920 frames at 1920 × 1080, 30 fps, exactly 164 seconds. Image comparisons verify the title hold, intermediate fade, first route frame and retained last frame. Chapters and room seeks move forward by one second. The comparison poster uses the same lossless 1080p title image. All 14 existing tests and module/DOM checks pass.
+
+## In-app video display repair, 2026-09-28
+
+A user playback check exposed a gap in earlier validation: the native video element could decode and advance its timestamp while displaying a black surface. Metadata, decoded-file checks and screenshots of the static title were insufficient evidence of visible playback. The private comparison now draws the decoded video into a 1080p canvas and provides explicit playback controls. Visible moving frames were checked for both engines, together with engine switching, room seeking, pause/restart and fullscreen entry/exit. The media files were not reencoded.
+
+## Project title background, 2026-09-28
+
+A private user-supplied 1920 × 960 JPEG was retained unchanged and served through the fixed per-project video-background endpoint. Browser export decoded the asset and used a centered cover crop behind the existing title. The updated Three.js and Unreal files passed complete decode at 1920 × 1080, 30 fps, 4,920 frames and 164 seconds. Frame comparisons checked the half-second hold, fade, first route frame and retained ending. All 14 existing tests, syntax/DOM checks and changed-file formatting checks passed. The background and property media remain in ignored private storage.

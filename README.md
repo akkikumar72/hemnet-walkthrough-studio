@@ -8,9 +8,9 @@ Turn Hemnet references into a reviewable 3D draft, explore it in Three.js, and c
 
 [Quick start](#quick-start) · [Local Codex skill](#use-the-codex-skill) · [Engine comparison](#choose-your-output) · [Quality & limits](docs/QUALITY.md)
 
-![Walkthrough Studio reference workspace and interactive 3D preview](docs/app-preview.png)
+![Walkthrough Studio with the Lumen theme and an interactive Three.js scene](docs/lumen-app-preview.png)
 
-*Reference review and interactive 3D preview in the local app. Courtyard House is an original fictional demo, not a reconstructed listing.*
+*The current Lumen workspace, captured from the running app. Courtyard House is an original fictional demo, not a reconstructed listing.*
 
 [![Checks](https://github.com/akkikumar72/hemnet-walkthrough-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/akkikumar72/hemnet-walkthrough-studio/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-445e70)](LICENSE)
@@ -22,9 +22,11 @@ Turn Hemnet references into a reviewable 3D draft, explore it in Three.js, and c
 
 - **Bring your own property.** Import an accessible Hemnet listing or upload permitted JPEG, PNG and WebP photos. Review, categorize and select the references.
 - **Create an editable draft.** Use OpenAI vision with a strict scene schema, or let Codex prepare the scene using the included local skill. Keep measurements and inferred details clearly labeled.
-- **Explore room to room.** Orbit the model, walk on a floor, jump to a room, or play a continuous camera route with the matching source-photo inset.
+- **Explore room to room.** Overview shows the complete roof; Cutaway opens the interior for inspection. Walk on a floor, jump to a room, or play a continuous camera route with the matching source-photo inset. Walking and video keep the roof in place.
 - **Take it further.** Export scene JSON, a binary glTF model, a 1080p browser video, or an Unreal project with a continuous sequence and 4K rendering preset.
 - **Keep projects local.** Separate project folders, retained source files, versioned scene edits, and session-only or environment-based API keys.
+
+The Lumen interface includes locally hosted fonts, keyboard-accessible tabs, full-screen viewing and a responsive project workspace. Shared geometry now includes closed roof slabs, gables, foliage, and distinct desks, swivel chairs and drawer cabinets. These improve the tools available for refinement; a listing still needs evidence review and correction.
 
 > **Current release: reconstruction workbench, v0.1.** Automatic output uses procedural geometry and simple materials. It is a starting point for refinement, not a one-click photorealistic digital twin or a finished premium service. Hemnet can block automated imports. Local photo upload is the supported fallback. See [quality limits](docs/QUALITY.md) and [verified checks](docs/VALIDATION.md).
 
@@ -71,11 +73,15 @@ Choose either:
 | Shared data | Scene JSON and compiled geometry | Same scene, geometry and route |
 | Preview | Orbit, same-floor walking, room navigation | Editable map and camera actors |
 | Guided tour | Continuous route playback | `HomeTour` Level Sequence |
-| Video | Real-time 1920×1080 WebM, target 30 fps | `Render4K` preset for 3840×2160 PNG frames at 30 fps |
+| Video | Frame-by-frame 1920×1080 WebM at 30 fps (WebCodecs) | `Render4K` preset for 3840×2160 PNG frames at 30 fps |
 | Refinement | Edit JSON or extend the renderer | Replace meshes, materials, lighting and staging in the editor |
 | Current limits | Procedural assets, no full stair physics | Export does not include a packaged player or automatic movie render |
 
-For Unreal: download **Unreal project**, extract it into a new folder, open `StudioHome.uproject`, then use **Tools → Execute Python Script** to run `build_unreal.py`. It saves a new timestamped map, sequence and preset. Open the sequence to preview and use Movie Render Queue to render. Each build preserves earlier generated assets.
+For Unreal: download **Unreal project**, extract it into a new folder, open `StudioHome.uproject`, then use **Tools → Execute Python Script** to run `build_unreal.py`. It saves a new timestamped map, sequence and preset. Open the sequence to preview and use Movie Render Queue to render. Each build preserves earlier generated assets. Rounded furniture and procedural landscape geometry are shared with the browser through included OBJ meshes. Materials and lighting are tuned per engine; the exporter does not make an approximate reconstruction photorealistic.
+
+**Browser rendering:** matched daylight direction, window area lights, per-room reflections captured from the actual model, contact occlusion and up to four MSAA samples. Video export waits for lighting and source images, renders every route frame and writes an indexed VP9 WebM. Keep the tab visible; export pauses when the browser suspends animation. Encoding speed depends on the GPU, but the output timeline does not. Requires VP9 WebCodecs support, checked before export.
+
+**Video presentation:** browser exports open with “3D Walkthrough” and the property title, hold for half a second, then fade into the full route. The film shows the address and changing room name at the upper left, with a matching photo inset when available. The one-second opening is added to the route duration. Download the video directly for editing or music; player controls are not part of the export. A custom opening image can be configured in the private project folder as described in [the scene architecture](docs/ARCHITECTURE.md). Unreal exports provide the scene and sequence; the browser's title and photo overlays are not built into that sequence.
 
 The engines share the scene contract; their lighting and final pixels are not identical. Compare the same evidence, route, resolution and asset quality before choosing an engine. [Architecture and schema](docs/ARCHITECTURE.md).
 
@@ -130,4 +136,4 @@ Checks cover syntax, UI element bindings, URL restrictions, photo workflows, mod
 
 Read [validation evidence](docs/VALIDATION.md) for the distinction between automated tests, real browser checks, and an actual Unreal build. Contributions should include evidence for changed user flows and keep private listing data out of fixtures.
 
-photographs and third-party assets are not covered by this repository's code license. The public demo and README image use original fictional geometry.
+Listing photographs and third-party assets are not covered by this repository's code license. The public demo and README image use original fictional geometry.

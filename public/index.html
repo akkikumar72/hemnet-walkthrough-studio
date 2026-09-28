@@ -3,7 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
     <title>Hemnet Walkthrough Studio</title>
+    <link rel="stylesheet" href="/tokens.css" />
+    <link rel="stylesheet" href="/fonts.css" />
     <link rel="stylesheet" href="/style.css" />
     <script type="importmap">
       {
@@ -15,6 +18,7 @@
     </script>
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to workspace</a>
     <header>
       <a class="brand" href="/" aria-label="Walkthrough Studio home"
         ><svg viewBox="0 0 32 32" aria-hidden="true">
@@ -44,10 +48,9 @@
           >
         </div>
       </aside>
-      <main>
+      <main id="main" tabindex="-1">
         <section id="intake">
           <div class="intro">
-            <span class="kicker">From listing to living space</span>
             <h1>Step inside<br />the possibilities.</h1>
             <p>
               Bring a Hemnet listing into an editable 3D workspace. Review the
@@ -90,13 +93,29 @@
             <button id="new-from-panel" class="quiet">New project</button>
           </div>
           <div class="tabs" role="tablist" aria-label="Project workspace">
-            <button role="tab" aria-selected="true" data-tab="references">
+            <button
+              id="references-tab"
+              role="tab"
+              aria-selected="true"
+              aria-controls="references-panel"
+              data-tab="references"
+            >
               References</button
-            ><button role="tab" aria-selected="false" data-tab="scene">
+            ><button
+              id="scene-tab"
+              role="tab"
+              aria-selected="false"
+              aria-controls="scene-panel"
+              data-tab="scene"
+            >
               Scene & review
             </button>
           </div>
-          <div id="references-panel">
+          <div
+            id="references-panel"
+            role="tabpanel"
+            aria-labelledby="references-tab"
+          >
             <div class="panel-heading">
               <div>
                 <h2>Start with the evidence</h2>
@@ -131,7 +150,12 @@
               </p>
             </div>
           </div>
-          <div id="scene-panel" hidden>
+          <div
+            id="scene-panel"
+            role="tabpanel"
+            aria-labelledby="scene-tab"
+            hidden
+          >
             <div class="panel-heading">
               <div>
                 <h2>Review before you refine</h2>
@@ -140,12 +164,13 @@
               <div class="button-row">
                 <button id="download-json">Scene JSON</button
                 ><button id="download-glb">3D model (.glb)</button
-                ><button id="download-unreal" class="primary">
-                  Unreal project
-                </button>
+                ><button id="download-unreal">Unreal project</button>
               </div>
             </div>
-            <ul id="warnings" class="review-notes"></ul>
+            <details class="fidelity-notes">
+              <summary>Reconstruction notes & estimates</summary>
+              <ul id="warnings" class="review-notes"></ul>
+            </details>
             <details id="editor-details">
               <summary>Edit or import scene data</summary>
               <p>
@@ -176,14 +201,15 @@
             </div>
             <div class="viewer-modes">
               <button id="orbit" aria-pressed="true">Overview</button
+              ><button id="cutaway" aria-pressed="false">Cutaway</button
               ><button id="walk" aria-pressed="false">Walk</button>
+              <button id="fullscreen">Full screen</button>
             </div>
           </div>
           <div id="viewport" tabindex="0" aria-label="Interactive 3D scene">
             <div id="view-badge">Editable draft</div>
             <div id="empty-scene" hidden>Add references to begin</div>
-            <figure id="source" hidden>
-              <figcaption>Source photo</figcaption>
+            <figure id="source" aria-label="Room reference image" hidden>
               <img
                 id="source-image"
                 alt="Reference photo for the current room"
@@ -208,6 +234,7 @@
           <div class="viewer-footer">
             <span id="scene-stat"
               >Original demo geometry. No listing photos.</span
+            ><span id="quality-status" role="status"></span
             ><span id="record-status"></span
             ><a id="export-link" hidden download>Download export</a>
           </div>
@@ -225,10 +252,10 @@
       multiple
       hidden
     />
-    <dialog id="settings">
-      <form id="settings-form">
+    <dialog id="settings" aria-labelledby="settings-title">
+      <form id="settings-form" aria-labelledby="settings-title">
         <div class="dialog-heading">
-          <h2>Connect your OpenAI account</h2>
+          <h2 id="settings-title">API settings</h2>
           <button type="button" id="settings-close" aria-label="Close settings">
             ×
           </button>
@@ -241,6 +268,7 @@
         ><input
           type="password"
           id="api-key"
+          autofocus
           autocomplete="off"
           placeholder="Stored only in memory"
         /><small id="key-status"></small

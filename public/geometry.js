@@ -5,7 +5,7 @@ export function compileGeometry(scene) {
     let index = 0;
     const [w, h, d] = e.size,
       a = (e.rotation * Math.PI) / 180;
-    const part = (kind, x, y, z, sx, sy, sz, color = e.color) => {
+    const part = (kind, x, y, z, sx, sy, sz, color = e.color, yaw = 0) => {
       out.push({
         id: `${e.id}_${index++}`,
         element: e.id,
@@ -17,7 +17,7 @@ export function compileGeometry(scene) {
           e.position[2] - x * Math.sin(a) + z * Math.cos(a),
         ],
         size: [sx, sy, sz],
-        rotation: e.rotation,
+        rotation: e.rotation + yaw,
         color,
         glass: e.kind === "window",
         sourcePhoto: e.sourcePhoto,
@@ -30,6 +30,139 @@ export function compileGeometry(scene) {
           box(x, -h / 2 + top / 2, z, th, top, th, "#514438");
     };
     switch (e.kind) {
+      case "task-chair":
+      case "office-chair": {
+        // Local +Z faces the desk. Task chairs have a solid upholstered back.
+        const upholstered = e.kind === "task-chair";
+        const y = (fraction) => h * (fraction - 0.5);
+        part(
+          upholstered ? "cushion" : "box",
+          0,
+          y(0.54),
+          0.01 * d,
+          w * 0.92,
+          h * (upholstered ? 0.075 : 0.055),
+          d * 0.77,
+        );
+        part(
+          upholstered ? "cushion" : "perforated-back",
+          0,
+          y(0.79),
+          -d * 0.35,
+          w * 0.92,
+          h * 0.42,
+          d * 0.15,
+        );
+        part(
+          "cylinder",
+          0,
+          y(0.31),
+          0,
+          w * 0.08,
+          h * 0.39,
+          w * 0.08,
+          "#242526",
+        );
+        part(
+          "cylinder",
+          0,
+          y(0.49),
+          0,
+          w * 0.32,
+          h * 0.045,
+          d * 0.28,
+          "#242526",
+        );
+        for (let j = 0; j < 5; j++) {
+          const angle = (j * Math.PI * 2) / 5;
+          const radius = Math.min(w, d) * 0.43;
+          part(
+            "box",
+            (Math.sin(angle) * radius) / 2,
+            y(0.105),
+            (Math.cos(angle) * radius) / 2,
+            w * 0.075,
+            h * 0.035,
+            radius * 1.04,
+            "#242526",
+            j * 72,
+          );
+          part(
+            "sphere",
+            Math.sin(angle) * radius,
+            y(0.045),
+            Math.cos(angle) * radius,
+            w * 0.13,
+            h * 0.09,
+            d * 0.13,
+            "#242526",
+          );
+        }
+        break;
+      }
+      case "writing-desk": {
+        box(0, h / 2 - 0.015, 0, w, 0.03, d);
+        for (const x of [-w / 2 + 0.023, w / 2 - 0.023]) {
+          for (const z of [-d / 2 + 0.023, d / 2 - 0.023])
+            box(x, -0.015, z, 0.035, h - 0.03, 0.035);
+          box(x, -h / 2 + 0.18, 0, 0.028, 0.028, d - 0.04);
+        }
+        box(0, h / 2 - 0.1, -d / 2 + 0.023, w - 0.05, 0.065, 0.028);
+        break;
+      }
+      case "vanity-desk": {
+        const top = h / 2 - 0.015;
+        box(0, top, 0, w, 0.03, d);
+        // Slim painted frame, with two shallow drawer fronts below the top.
+        for (const x of [-w / 2 + 0.025, w / 2 - 0.025])
+          for (const z of [-d / 2 + 0.025, d / 2 - 0.025])
+            box(x, -0.015, z, 0.026, h - 0.03, 0.026);
+        box(0, top - 0.075, -d / 2 + 0.025, w - 0.05, 0.12, 0.022);
+        for (const x of [-w * 0.247, w * 0.247]) {
+          box(x, top - 0.074, d / 2 - 0.018, w * 0.476, 0.105, 0.022);
+          box(x, top - 0.055, d / 2 - 0.004, w * 0.06, 0.006, 0.008, "#d3cfc7");
+        }
+        break;
+      }
+      case "drawer-chest": {
+        box(0, 0, -0.012, w, h, d - 0.025);
+        for (let j = 0; j < 5; j++) {
+          const dh = (h - 0.08) / 5;
+          box(
+            0,
+            -h / 2 + 0.045 + dh * (j + 0.5),
+            d / 2 + 0.002,
+            w - 0.018,
+            dh - 0.009,
+            0.028,
+          );
+        }
+        box(0, h / 2 - 0.012, 0.003, w + 0.018, 0.025, d + 0.022);
+        break;
+      }
+      case "tree":
+        part(
+          "cylinder",
+          0,
+          -h * 0.26,
+          0,
+          w * 0.065,
+          h * 0.48,
+          d * 0.065,
+          "#73644d",
+        );
+        part("canopy", 0, h * 0.16, 0, w, h * 0.68, d);
+        break;
+      case "hedge":
+        part("hedge", 0, 0, 0, w, h, d);
+        // Dense interior prevents a clipped hedge reading as a transparent leaf cloud.
+        part("box", 0, -h * 0.015, 0, w * 0.94, h * 0.87, d * 0.72, "#344b29");
+        break;
+      case "gable":
+      case "roof":
+      case "wedge":
+        part(e.kind, 0, 0, 0, w, h, d);
+        break;
       case "sofa":
         box(0, -h * 0.17, 0, w, h * 0.42, d);
         box(0, h * 0.18, -d * 0.4, w, h * 0.64, d * 0.18);
@@ -49,7 +182,12 @@ export function compileGeometry(scene) {
         break;
       case "chair":
         box(0, -h * 0.08, 0, w, h * 0.12, d);
-        box(0, h * 0.25, -d * 0.43, w, h * 0.46, d * 0.12);
+        // A supported slatted back preserves the silhouette of a dining chair.
+        for (const x of [-w * 0.44, w * 0.44])
+          box(x, h * 0.22, -d * 0.43, w * 0.1, h * 0.52, d * 0.1);
+        box(0, h * 0.45, -d * 0.43, w, h * 0.08, d * 0.12);
+        for (const x of [-w * 0.22, 0, w * 0.22])
+          box(x, h * 0.22, -d * 0.43, w * 0.09, h * 0.4, d * 0.07);
         legs(h * 0.42, 0.04);
         break;
       case "table":

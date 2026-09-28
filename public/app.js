@@ -9,6 +9,7 @@ let config,
 const status = (text, error = false) => {
   $("status").textContent = text;
   $("status").classList.toggle("error", error);
+  $("status").dataset.state = error ? "error" : "success";
 };
 const run =
   (fn) =>
@@ -48,6 +49,9 @@ const download = (data, name, type) => {
 };
 const viewer = new HomeViewer($("viewport"), {
   onDownload: download,
+  onQuality: (message) => {
+    $("quality-status").textContent = message;
+  },
   onTime: (t, d) => {
     $("timeline").max = d;
     $("timeline").value = t;
@@ -59,10 +63,14 @@ const viewer = new HomeViewer($("viewport"), {
     if (!room || room.id === currentRoom) return;
     currentRoom = room.id;
     $("room-jump").value = room.id;
-    const photo = project?.photos.find((p) => room.photoIds.includes(p.id));
+    const photo = room.photoIds
+      .map((id) => project?.photos.find((p) => p.id === id))
+      .find(Boolean);
     $("source").hidden = !photo;
-    if (photo)
+    if (photo) {
       $("source-image").src = `/api/projects/${project.id}/photos/${photo.id}`;
+      $("source-image").dataset.category = photo.category;
+    }
   },
   onRecord: (message) => {
     $("record-status").textContent = message;
@@ -75,16 +83,22 @@ const viewer = new HomeViewer($("viewport"), {
   },
 });
 function tab(which) {
+  const panel = document.querySelector(".viewer-panel");
+  if (which === "scene") $("scene-panel").prepend(panel);
+  else $("main").insertBefore(panel, document.querySelector("main > footer"));
   $("references-panel").hidden = which !== "references";
   $("scene-panel").hidden = which !== "scene";
-  for (const b of document.querySelectorAll("[data-tab]"))
+  for (const b of document.querySelectorAll("[data-tab]")) {
     b.setAttribute("aria-selected", String(b.dataset.tab === which));
+    b.tabIndex = b.dataset.tab === which ? 0 : -1;
+  }
 }
 function refreshBusy() {
   const busy = !!project?.busy;
   for (const id of ["generate", "add-photos", "save-scene"])
     $(id).disabled = busy;
   $("generate").textContent = busy ? "Working…" : "Generate 3D draft";
+  $("generate").setAttribute("aria-busy", String(busy));
 }
 function setScene(scene) {
   if (exportURL) {
@@ -93,10 +107,14 @@ function setScene(scene) {
   }
   $("export-link").hidden = true;
   currentRoom = "";
+  viewer.titleBackgroundUrl = project?.videoBackground
+    ? `/api/projects/${project.id}/video-background`
+    : null;
   viewer.load(scene);
   $("play").textContent = "Play tour";
   $("orbit").setAttribute("aria-pressed", "true");
   $("walk").setAttribute("aria-pressed", "false");
+  $("cutaway").setAttribute("aria-pressed", "false");
   $("view-title").textContent = scene.title;
   $("view-label").textContent =
     !project || project.demo
@@ -117,6 +135,20 @@ function setScene(scene) {
   $("play").disabled = false;
   $("record").disabled = false;
   $("walk").disabled = false;
+  $("cutaway").disabled = false;
+  exteriorReference();
+}
+function exteriorReference() {
+  const id = project?.scene?.elements.find(
+    (e) => e.id.startsWith("roof-metal-") && e.sourcePhoto,
+  )?.sourcePhoto;
+  const photo = project?.photos.find((p) => p.id === id);
+  currentRoom = "";
+  $("source").hidden = !photo;
+  if (photo) {
+    $("source-image").src = `/api/projects/${project.id}/photos/${photo.id}`;
+    $("source-image").dataset.category = photo.category;
+  }
 }
 async function projects() {
   const rows = await api("/api/projects");
@@ -124,6 +156,7 @@ async function projects() {
     ...rows.map((p) => {
       const b = document.createElement("button");
       b.classList.toggle("active", project?.id === p.id);
+      if (project?.id === p.id) b.setAttribute("aria-current", "page");
       const title = document.createElement("span");
       title.textContent = p.title;
       const sub = document.createElement("small");
@@ -213,6 +246,7 @@ function showProject() {
     $("empty-scene").hidden = false;
     $("play").disabled = true;
     $("record").disabled = true;
+    $("cutaway").disabled = true;
     $("walk").disabled = true;
     $("source").hidden = true;
     viewer.playing = false;
@@ -270,6 +304,7 @@ async function fresh() {
   history.replaceState(null, "", "/");
   $("intake").hidden = false;
   $("project-panel").hidden = true;
+  tab("references");
   status("");
   projects();
   $("listing-url").focus();
@@ -320,8 +355,23 @@ $("demo").onclick = run(async () => {
   const p = await api("/api/demo", "POST", {});
   await openProject(p.id);
 });
-for (const b of document.querySelectorAll("[data-tab]"))
+for (const b of document.querySelectorAll("[data-tab]")) {
   b.onclick = () => tab(b.dataset.tab);
+  b.onkeydown = (event) => {
+    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+    event.preventDefault();
+    const next =
+      event.key === "Home"
+        ? "references"
+        : event.key === "End"
+          ? "scene"
+          : b.dataset.tab === "references"
+            ? "scene"
+            : "references";
+    tab(next);
+    document.querySelector(`[data-tab="${next}"]`).focus();
+  };
+}
 $("generate").onclick = run(async () => {
   if (!$("ai-consent").checked)
     throw new Error("Confirm sending the selected photos to OpenAI.");
@@ -390,8 +440,10 @@ $("download-glb").onclick = run(async () => {
   download(await viewer.glb(), "home.glb", "model/gltf-binary");
 });
 function tourMode() {
+  $("view-hint").textContent = "Continuous room-to-room camera route";
   $("orbit").setAttribute("aria-pressed", "false");
   $("walk").setAttribute("aria-pressed", "false");
+  $("cutaway").setAttribute("aria-pressed", "false");
 }
 $("play").onclick = () => {
   tourMode();
@@ -413,21 +465,34 @@ $("room-jump").onchange = (e) => {
 };
 $("orbit").onclick = () => {
   viewer.overview();
+  exteriorReference();
   $("orbit").setAttribute("aria-pressed", "true");
   $("walk").setAttribute("aria-pressed", "false");
+  $("cutaway").setAttribute("aria-pressed", "false");
   $("view-hint").textContent = "Drag to orbit · Scroll to zoom";
+  $("play").textContent = "Play tour";
+};
+$("cutaway").onclick = () => {
+  viewer.overview(true);
+  $("source").hidden = true;
+  currentRoom = "";
+  $("cutaway").setAttribute("aria-pressed", "true");
+  $("orbit").setAttribute("aria-pressed", "false");
+  $("walk").setAttribute("aria-pressed", "false");
+  $("view-hint").textContent =
+    "Roof hidden for interior inspection · Drag to orbit";
   $("play").textContent = "Play tour";
 };
 $("walk").onclick = () => {
   viewer.walk();
   $("walk").setAttribute("aria-pressed", "true");
   $("orbit").setAttribute("aria-pressed", "false");
-  $("view-hint").textContent =
-    "WASD to walk · Drag to look · Same-floor walking";
+  $("cutaway").setAttribute("aria-pressed", "false");
+  $("view-hint").textContent = "WASD to walk · Drag to look";
 };
 $("record").onclick = run(() => {
   tourMode();
-  viewer.record();
+  return viewer.record();
 });
 await run(async () => {
   config = await api("/api/config");
@@ -443,3 +508,13 @@ await run(async () => {
     setScene(sample);
   }
 })();
+
+$("fullscreen").onclick = run(async () => {
+  if (document.fullscreenElement) await document.exitFullscreen();
+  else await document.querySelector(".viewer-panel").requestFullscreen();
+});
+document.addEventListener("fullscreenchange", () => {
+  $("fullscreen").textContent = document.fullscreenElement
+    ? "Exit full screen"
+    : "Full screen";
+});

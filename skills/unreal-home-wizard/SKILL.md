@@ -40,13 +40,13 @@ Default to strict reconstruction of visible evidence. Do not beautify, redesign,
 - Inventory every usable image. Group by room, floor, exterior, floor plan, detail, and duplicates. Relate every modeled room and dominant object to its source photos.
 - Record observed and estimated geometry separately. Prefer the floor plan for connectivity and known measurements for scale. Unknown ceilings and hidden dimensions remain estimates.
 - Preserve original-resolution photos. Inspect image dimensions before promising sharp close-ups. Do not pretend upscaling restores unseen details, and do not use generated images as proof of reconstruction accuracy.
-- Match architecture, window and door openings, stair voids, ceiling slopes, finishes, furniture silhouettes, and dominant colors. Correct intersections, floating objects, unsupported lights, and misplaced decor.
+- Match architecture, window and door openings, stair voids, ceiling slopes, finishes, furniture silhouettes, and dominant colors. Keep ceilings and the observed exterior roof closed in walkthroughs; use the explicit Cutaway mode for inspection. Count physical furniture before modeling it, exclude mirror reflections, and check chair orientation, desktop height and clearances together.
 - Include all evidenced rooms in the route, not only two attractive rooms. Explain omissions. Test camera height, doorway clearance, room transitions, and stairs.
 - Show matched camera comparisons with the original photo. Record unresolved issues and refine before describing the result as premium, photorealistic, or ready for customers.
 
 For full construction read [references/quality-bar.md](references/quality-bar.md) and [references/logic-and-fidelity-audit.md](references/logic-and-fidelity-audit.md). Treat their review gates as checkpoints; existing user authorization still applies. Show the rough layout and final comparisons when ready. Ask for a decision only when an unresolved choice affects the result.
 
-The studio schema is a constrained draft format using procedural furnishings and flat colors. For higher fidelity, export to Unreal or extend the Three.js scene with licensed assets, calibrated materials and lighting. Describe this work explicitly. The viewer does not implement photogrammetry, Gaussian splats, automatic texture reconstruction, or full stair physics.
+The studio schema is a constrained draft format using procedural furnishings and surface detail. Three.js and Unreal share rounded meshes, roof slabs and foliage, but have different material and lighting implementations. For higher fidelity, refine either renderer with licensed assets, calibrated materials and lighting. Describe this work explicitly. The viewer does not implement photogrammetry, Gaussian splats, automatic texture reconstruction, or full stair physics.
 
 ## Unreal route
 
@@ -58,10 +58,11 @@ Ask before a large engine/compiler download, a purchase, account sign-in, or lic
 
 ## Tour and video delivery
 
-- Browser controls: overview orbit, same-floor WASD and drag-to-look, room selection, continuous tour, and 1080p WebM recording where MediaRecorder is supported. Real-time recordings depend on GPU frame pacing.
+- Browser controls: Overview with the roof, explicit Cutaway, WASD and drag-to-look, room selection, continuous tour, and full screen. Floor/step support is available; verify stairs in the actual property before promising free multi-floor walking.
+- Browser video export uses frame-by-frame WebCodecs encoding at 1920×1080 and 30 fps, producing a seekable VP9 WebM. Require compatible browser support and wait for lighting, fonts and photos. The one-second opening is added to the complete route. Export can be slower than playback; it does not drop route frames to keep up with wall time.
 - Unreal controls: editable map and sequence. Set up and verify collision, a player pawn, gravity and stairs separately before promising a packaged walkable executable.
-- Video: cover every evidenced room, move through real openings, use gentle speed and turns, and keep transitions spatially plausible. Show the property title, engine/output label, and matching source photo when available and permitted. Keep text readable and away from controls.
-- Examine rendered frames at the start, end, transitions, and representative views of every room. Decode the exported video to verify dimensions and duration. A running preview does not prove an exported file works.
+- Video: cover every evidenced room, move through real openings, use gentle speed and turns, and keep transitions spatially plausible. Follow the user's presentation choices. The browser default is a title card, compact address and changing room label at upper left, and an unlabelled source-photo inset at lower right. Engine labels belong in comparison controls unless requested in the film. Unreal's exported sequence does not include these browser overlays; compose them separately when requested.
+- Examine rendered frames at the start, end, transitions, and representative views of every room. Decode the exported video to verify dimensions, frame rate and duration, then check visible moving frames in the intended player. A progressing timestamp can coexist with a black display. Provide the actual video file for editing rather than a screen recording with player controls.
 - Compare engines with the same geometry, route, evidence, resolution, and stated quality settings. Distinguish engine limitations from missing assets and uncertain reconstruction.
 
 ## Surroundings and privacy

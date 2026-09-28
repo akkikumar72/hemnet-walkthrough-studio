@@ -9,12 +9,17 @@ The bundled skill retains upstream platform scripts and review references.
 Modifications: revised SKILL.md and agents/openai.yaml; added
 references/studio-workflow.md; integrated local Three.js and Unreal export
 workflows, API-key handling guidance, privacy and delivery boundaries.
-Modifications dated 2026-09-27.
+Modifications dated 2026-09-27 and 2026-09-28. Updated guidance covers shared
+roof and furniture geometry, deterministic video export and visible playback
+verification.
 
 Runtime dependencies are obtained separately through npm:
 Three.js (MIT), fflate (MIT), Ajv (MIT), with their transitive dependencies.
 Their respective licenses remain applicable. Unreal Engine is installed
 separately and is governed by Epic's license. It is not redistributed here.
+
+Bundled Geist, Instrument Serif, JetBrains Mono and Roboto fonts retain their
+SIL Open Font License notices in public/fonts/.
 
 Original fictional demo geometry and the application screenshot are provided
 under this repository's Apache-2.0 license. Third-party listing photos,

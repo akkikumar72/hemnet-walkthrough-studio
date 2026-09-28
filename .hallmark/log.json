@@ -1,0 +1,14 @@
+[
+  {
+    "date": "2026-09-27",
+    "scope": "app",
+    "macrostructure": "Workbench",
+    "theme": "studied-DNA",
+    "reference": "https://www.usehallmark.com/examples/lumen-01/",
+    "name": "Lumen / Night Foundry",
+    "nav": "N9",
+    "footer": "Ft2",
+    "enrichment": "none",
+    "brief": "Apply saved Lumen theme to the existing local walkthrough studio"
+  }
+]
