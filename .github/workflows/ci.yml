@@ -20,5 +20,7 @@ jobs:
       - run: npm run format:check
       - run: npm run check
       - run: npm test
+      - run: npm run build
+      - run: npm run typecheck
       - name: Check Unreal Python syntax
         run: python3 -m py_compile scripts/build_unreal.py

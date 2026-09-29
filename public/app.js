@@ -301,7 +301,7 @@ async function fresh() {
   viewer.playing = false;
   setScene(await api("/api/example"));
   $("source").hidden = true;
-  history.replaceState(null, "", "/");
+  history.replaceState(null, "", location.pathname);
   $("intake").hidden = false;
   $("project-panel").hidden = true;
   tab("references");
@@ -506,6 +506,12 @@ await run(async () => {
   else {
     const sample = await api("/api/example");
     setScene(sample);
+    const listing = new URLSearchParams(location.search).get("listing");
+    if (listing) {
+      $("listing-url").value = listing;
+      $("listing-url").focus();
+      status("Your listing is ready. Confirm photo permission to import it.");
+    }
   }
 })();
 
