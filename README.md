@@ -141,4 +141,4 @@ Checks cover syntax, UI element bindings, URL restrictions, photo workflows, mod
 
 Read [validation evidence](docs/VALIDATION.md) for the distinction between automated tests, real browser checks, and an actual Unreal build. Contributions should include evidence for changed user flows and keep private listing data out of fixtures.
 
-Listing photographs and third-party assets are not covered by this repository's code license. The public demo and README image use original fictional geometry.
+Listing photographs and third-party assets are not covered by this repository's code license. The public demo uses original fictional geometry. The README screenshot shows the landing page with Noaks väg 3B listing photography by Jean Vanrop / Vanrop Photography.
