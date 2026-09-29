@@ -38,10 +38,15 @@ Install [Node.js 22 or later](https://nodejs.org/), then:
 git clone https://github.com/akkikumar72/hemnet-walkthrough-studio.git
 cd hemnet-walkthrough-studio
 npm ci --ignore-scripts
+npm run build
 npm start
 ```
 
-Open **http://127.0.0.1:8770** and select **Explore the demo**. No API key or Unreal installation is needed for the fictional demo, scene editing, or browser exports.
+Open **http://127.0.0.1:8770** for the Next.js landing page. Paste a Hemnet link to continue to the studio, or open **http://127.0.0.1:8770/studio/** and select **Explore the demo**. No API key or Unreal installation is needed for the fictional demo, scene editing, or browser exports.
+
+For development, use `npm run dev`. The original standalone studio server remains available through `npm run start:studio`.
+
+The landing page is adapted from the visual direction of [Forma Interior](https://www.framer.com/marketplace/templates/forma-interior/). It features the existing Noaks väg 3B film and interactive tour when that private project is installed locally. Those media files are not bundled in this public repository. Set `NOAKS_HOME_DIR` if the home project is not in the adjacent `noaks-vag-home` folder, then use `npm run noaks:serve` in a second terminal to start the original interactive tour. See [landing scope, setup and verification](docs/LANDING.md).
 
 For your property:
 

@@ -18,6 +18,8 @@ flowchart LR
 
 ## Small modules, shared evidence
 
+- `app/`: Next.js landing page, responsive navigation, preserved film/tour showcase, Hemnet intake handoff and custom 404.
+- `src/site-server.js` and `src/site-handler.js`: one loopback origin for the Next.js page and existing studio at `/studio/`; allowlisted private demo media with byte-range streaming. Noaks itself remains a separate unchanged viewer. Old `/?project=` links redirect into the studio.
 - `src/server.js`: loopback HTTP API, local projects, background jobs and static assets.
 - `src/importer.js`: Hemnet URL normalization, gallery extraction, bounded downloads and image persistence.
 - `src/analyze.js`: one explicit OpenAI Responses request with image inputs and structured output. It never executes model-generated code.
