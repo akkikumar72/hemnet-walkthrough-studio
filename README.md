@@ -8,9 +8,9 @@ Turn Hemnet references into a reviewable 3D draft, explore it in Three.js, and c
 
 [Quick start](#quick-start) · [Local Codex skill](#use-the-codex-skill) · [Engine comparison](#choose-your-output) · [Quality & limits](docs/QUALITY.md)
 
-![The Lumen workspace showing a furnished Three.js living room, tour controls and Unreal project export](docs/lumen-app-preview.png)
+![Walkthrough Studio landing page featuring Noaks väg 3B, with options to explore the home, watch the film or try a Hemnet listing](docs/landing-page-preview.jpg)
 
-*A room-level view of the running Lumen workspace, with playback controls and export options. Courtyard House is an original fictional demo, not a reconstructed listing.*
+*The new landing page, shown with the local Noaks väg 3B example. Explore the home, watch the walkthrough, or start with your own Hemnet link.*
 
 [![Checks](https://github.com/akkikumar72/hemnet-walkthrough-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/akkikumar72/hemnet-walkthrough-studio/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-445e70)](LICENSE)
